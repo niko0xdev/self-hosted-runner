@@ -12,10 +12,7 @@ RUN apt-get update \
     iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 
-# Set up user and working directory
-RUN useradd -m runner \
-    && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-USER runner
+# Working directory
 WORKDIR /runner
 
 # Install GitHub Actions Runner

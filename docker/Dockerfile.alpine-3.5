@@ -11,10 +11,7 @@ RUN apk update && \
     unzip \
     iputils
 
-# Set up user and working directory
-RUN adduser -D runner \
-    && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-USER runner
+# Working directory
 WORKDIR /runner
 
 # Install GitHub Actions Runner
