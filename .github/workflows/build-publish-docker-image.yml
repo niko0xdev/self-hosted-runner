@@ -20,9 +20,9 @@ jobs:
 
       - name: Build Docker images
         run: |
-          - docker build -f Dockerfile.ubuntu-20.04 -t $IMAGE_NAME:ubuntu-20.04 .
-          - docker build -f Dockerfile.centos-7 -t $IMAGE_NAME:centos-7 .
-          - docker build -f Dockerfile.alpine-3.5 -t $IMAGE_NAME:alpine-3.5 .
+          - docker build -f docker/Dockerfile.ubuntu-20.04 -t $IMAGE_NAME:ubuntu-20.04 .
+          - docker build -f docker/Dockerfile.centos-7 -t $IMAGE_NAME:centos-7 .
+          - docker build -f docker/Dockerfile.alpine-3.5 -t $IMAGE_NAME:alpine-3.5 .
 
       - name: Login to Docker Hub
         run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
