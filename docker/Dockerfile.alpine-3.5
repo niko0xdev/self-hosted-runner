@@ -1,0 +1,34 @@
+# Dockerfile for self-hosted runner with Alpine 3.5
+
+FROM alpine:3.5
+
+# Install dependencies
+RUN apk update && \
+    apk add --no-cache \
+    ca-certificates \
+    curl \
+    sudo \
+    unzip \
+    iputils
+
+# Set up user and working directory
+RUN adduser -D runner \
+    && echo "runner ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+USER runner
+WORKDIR /runner
+
+# Install GitHub Actions Runner
+ARG RUNNER_VERSION="2.304.0"
+ARG RUNNER_CHECKSUM="292e8770bdeafca135c2c06cd5426f9dda49a775568f45fcc25cc2b576afc12f"
+
+RUN curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz \
+    && echo "292e8770bdeafca135c2c06cd5426f9dda49a775568f45fcc25cc2b576afc12f  actions-runner.tar.gz" | sha256sum -c - \
+    && tar xzf ./actions-runner.tar.gz \
+    && rm actions-runner.tar.gz
+
+# Copy entrypoint script and make it executable
+COPY entrypoint.sh .
+RUN chmod +x ./entrypoint.sh
+
+# Configure the runner
+ENTRYPOINT ["./entrypoint.sh"]
