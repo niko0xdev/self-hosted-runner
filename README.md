@@ -8,6 +8,10 @@ To use this self-hosted runner, you need to have the following prerequisites ins
 
 - Docker: Make sure you have Docker installed on your machine. You can download and install Docker from the official website: [https://www.docker.com/](https://www.docker.com/)
 
+## Use already Docker images on Docker hub:
+
+- [niko0xdev/self-hosted-runner](https://hub.docker.com/r/niko0xdev/self-hosted-runner/)
+
 ## Setup Instructions
 
 Follow these steps to set up the self-hosted runner with Docker:
